@@ -72,7 +72,11 @@ module SimpleCaptcha #:nodoc
           text_field(options[:object], :captcha, :value => '', :autocomplete => 'off') +
           hidden_field(options[:object], :captcha_key, {:value => options[:field_value]})
         else
-          text_field_tag(:captcha, nil, :autocomplete => 'off') +
+          html = {:autocomplete => 'off', :required => 'required'}
+          html.merge!(options[:input_html] || {})
+          html[:placeholder] = options[:placeholder] || I18n.t('simple_captcha.placeholder')
+        
+          text_field_tag(:captcha, nil, html) +
           hidden_field_tag(:captcha_key, options[:field_value])
         end
       end
