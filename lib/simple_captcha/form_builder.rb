@@ -33,7 +33,7 @@ module SimpleCaptcha
           html.merge!(options[:input_html] || {})
           html[:placeholder] = options[:placeholder] || I18n.t('simple_captcha.placeholder')
           
-          text_field(:captcha, :value => '', :autocomplete => 'off') +
+          text_field(:captcha, html) +
           hidden_field(:captcha_key, {:value => options[:field_value]})
         end
     end
