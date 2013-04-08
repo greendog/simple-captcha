@@ -40,7 +40,6 @@ module SimpleCaptcha #:nodoc
           extend ClassMethods
           
           attr_accessor :captcha, :captcha_key
-          attr_accessible :captcha, :captcha_key
         end
       end
     end
