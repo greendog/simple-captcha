@@ -4,8 +4,8 @@ module SimpleCaptcha
       base.send(:include, SimpleCaptcha::ViewHelper)
       base.send(:include, SimpleCaptcha::FormBuilder::ClassMethods)
       base.send(:include, ActionView::Helpers)
-      base.send(:include, Sprockets::Helpers::RailsHelper)
-      base.send(:include, Sprockets::Helpers::IsolatedHelper)
+      base.send(:include, Sprockets::Rails::Helpers::RailsHelper)
+      base.send(:include, Sprockets::Rails::Helpers::IsolatedHelper)
       
       base.delegate :render, :session, :to => :template
     end
