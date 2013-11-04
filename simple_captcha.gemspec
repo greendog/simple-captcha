@@ -7,10 +7,10 @@ Gem::Specification.new do |s|
   s.version = SimpleCaptcha::VERSION.dup
   s.platform = Gem::Platform::RUBY
   s.summary = "SimpleCaptcha is the simplest and a robust captcha plugin."
-  s.description = "SimpleCaptcha is available to be used with Rails 3 or above and also it provides the backward compatibility with previous versions of Rails."
+  s.description = "SimpleCaptcha is available to be used with Rails 3 + 4 or above and also it provides the backward compatibility with previous versions of Rails."
   s.authors = ["Pavlo Galeta", "Igor Galeta", 'Stefan Wienert']
-  s.email = "galeta.igor@gmail.com"
-  s.homepage = "http://github.com/izzm/simple-captcha"
+  s.email = "stwienert@gmail.com"
+  s.homepage = "http://github.com/pludoni/simple-captcha"
 
   s.files = Dir["{lib}/**/*"] + ["Rakefile", "README.rdoc"]
   s.extra_rdoc_files = ["README.rdoc"]

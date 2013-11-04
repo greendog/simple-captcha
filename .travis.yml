@@ -7,10 +7,20 @@ rvm:
   - '1.9.3'
   - '2.0.0'
 
+gemfile:
+  - gemfiles/Gemfile.default
+  - gemfiles/Gemfile.rails32
+
 env:
   - DB=sqlite
-  - DB=mysql
-  - DB=postgresql
+  # - DB=mysql
+  # - DB=postgresql
+
+matrix:
+  exclude:
+    - rvm: 1.9.3
+      gemfile: gemfiles/Gemfile.rails32
+      env: DB=sqlite
 
 before_script:
   - mysql -e 'create database myapp_test'

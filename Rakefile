@@ -15,7 +15,19 @@ RDoc::Task.new(:rdoc) do |rdoc|
 end
 
 APP_RAKEFILE = File.expand_path("../test/dummy/Rakefile", __FILE__)
-load 'rails/tasks/engine.rake'
+if File.exists? APP_RAKEFILE
+  load 'rails/tasks/engine.rake'
+end
+
+
+desc 'Setup dummy Rails app for test purpose'
+task :setup_dummy_app do
+  require 'rails'
+  require 'simple_captcha'
+  require File.expand_path('../test/lib/generators/simple_captcha/dummy/dummy_generator', __FILE__)
+
+  SimpleCaptcha::DummyGenerator.start %w(--quiet)
+end
 
 
 
