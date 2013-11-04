@@ -6,6 +6,7 @@ require "rails/test_help"
 
 require 'capybara/rails'
 require 'pry'
+require 'model'
 Rails.backtrace_cleaner.remove_silencers!
 
 # Load support files

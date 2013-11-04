@@ -1,11 +1,5 @@
 require 'test_helper'
 
-class User
-  include ActiveModel::Model
-  include SimpleCaptcha::ModelHelpers
-  apply_simple_captcha
-end
-
 class FormHelperTest  < ActionDispatch::IntegrationTest
   include Capybara::DSL
 

@@ -8,11 +8,14 @@ module SimpleCaptcha
     else
       set_table_name "simple_captcha_data"
     end
+    if defined? attr_protected
+      attr_protected
+    end
 
 
     class << self
       def get_data(key)
-        data = where(key: key).first || new(key: key)
+        where(key: key).first || new(key: key)
       end
 
       def remove_data(key)

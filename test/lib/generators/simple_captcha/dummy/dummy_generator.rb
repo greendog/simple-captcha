@@ -17,7 +17,7 @@ module SimpleCaptcha
     ]
 
     def generate_test_dummy
-      opts = (options || {}).slice(*PASSTHROUGH_OPTIONS)
+      opts = (options || {}).slice(*PASSTHROUGH_OPTIONS) || {} # rails 3.2 ? -> slice is nil
       opts[:force] = true
       opts[:skip_bundle] = true
       opts[:old_style_hash] = true

@@ -22,4 +22,17 @@ class PagesController < ApplicationController
       render text: 'captcha not valid!'
     end
   end
+
+  def formtastic_tag
+    @user = User.new
+  end
+
+  def formtastic_tag_submit
+    @user = User.new(params[:user])
+    if @user.valid_with_captcha?
+      render text: 'captcha valid!'
+    else
+      render :formtastic_tag
+    end
+  end
 end
