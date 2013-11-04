@@ -2,5 +2,6 @@ Rails.application.routes.draw do
 
   get "pages/form_tag"
   post "pages/form_tag" => 'pages#form_tag_submit'
-  mount SimpleCaptcha::Engine => "/simple_captcha"
+  get "pages/model_tag"
+  post "pages/model_tag" => 'pages#model_tag_submit'
 end
