@@ -211,6 +211,17 @@ You can change the CSS of the SimpleCaptcha DOM elements as per your need in thi
       default: "Secret Code did not match with the Image"
       user: "The secret Image and code were different"
 
+==Contributing
+
+For testing, generate a temporary Rails dummy app inside test:
+
+  rake dummy:setup
+  rake app:db:migrate
+  rake app:db:migrate RAILS_ENV=test
+  rake test
+
+Please add test cases when adding new functionality. I started with some basic example integration tests for a very basic coverage.
+
 ==Who's who?
 
 Enjoy the simplest captcha implementation.

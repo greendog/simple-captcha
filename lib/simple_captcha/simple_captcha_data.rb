@@ -8,7 +8,7 @@ module SimpleCaptcha
     else
       set_table_name "simple_captcha_data"
     end
-    if defined? attr_protected
+    if ::ActiveRecord::VERSION::MAJOR == 3 and defined? attr_protected
       attr_protected
     end
 
