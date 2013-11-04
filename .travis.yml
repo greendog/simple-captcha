@@ -13,6 +13,13 @@ env:
   - DB=sqlite FORMTASTIC='~> 2.2' RAILS='~> 3.2'
   - DB=sqlite FORMTASTIC='~> 2.2' RAILS='~> 4.0'
 
+matrix:
+  exclude:
+    - rvm: 1.9.3
+      env: DB=mysql RAILS='~> 4.0'
+    - rvm: 1.9.3
+      env: DB=sqlite FORMTASTIC='~> 2.2' RAILS='~> 4.0'
+
 
 before_script:
   - mysql -e 'create database myapp_test'
