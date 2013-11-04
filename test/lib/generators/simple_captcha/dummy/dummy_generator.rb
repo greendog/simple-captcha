@@ -49,27 +49,27 @@ module SimpleCaptcha
 
     protected
 
-      def dummy_path
-        'test/dummy'
-      end
+    def dummy_path
+      'test/dummy'
+    end
 
-      def module_name
-        'Dummy'
-      end
+    def module_name
+      'Dummy'
+    end
 
-      def application_definition
-        @application_definition ||= begin
-          dummy_application_path = File.expand_path("#{dummy_path}/config/application.rb", destination_root)
-          unless options[:pretend] || !File.exists?(dummy_application_path)
-            contents = File.read(dummy_application_path)
-            contents[(contents.index("module #{module_name}"))..-1]
-          end
-        end
-      end
-      alias :store_application_definition! :application_definition
+    def application_definition
+      @application_definition ||= begin
+                                    dummy_application_path = File.expand_path("#{dummy_path}/config/application.rb", destination_root)
+                                    unless options[:pretend] || !File.exists?(dummy_application_path)
+                                      contents = File.read(dummy_application_path)
+                                      contents[(contents.index("module #{module_name}"))..-1]
+                                    end
+                                  end
+    end
+    alias :store_application_definition! :application_definition
 
-      def gemfile_path
-        '../../../../Gemfile'
-      end
+    def gemfile_path
+      '../../../../Gemfile'
+    end
   end
 end
