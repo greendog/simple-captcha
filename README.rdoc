@@ -24,11 +24,8 @@ backward compatibility with previous versions of Rails.
 
 ==Installation
 
-  gem "galetahub-simple_captcha", :require => "simple_captcha"
 
-or
-
-  gem 'simple_captcha', :git => 'git://github.com/galetahub/simple-captcha.git'
+  gem 'simple_captcha', :git => 'git://github.com/pludoni/simple-captcha.git'
 
 ==Setup
 
