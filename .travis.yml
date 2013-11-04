@@ -25,3 +25,6 @@ matrix:
 before_script:
   - mysql -e 'create database myapp_test'
   - psql -c 'create database myapp_test' -U postgres
+  - rake dummy:setup
+  - rake app:db:migrate
+  - rake app:db:migrate RAILS_ENV=test

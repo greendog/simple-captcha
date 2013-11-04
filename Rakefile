@@ -19,15 +19,22 @@ if File.exists? APP_RAKEFILE
   load 'rails/tasks/engine.rake'
 end
 
+namespace :dummy do
+  desc 'Setup dummy Rails app for test purpose'
+  task :setup do
+    require 'rails'
+    require 'simple_captcha'
+    require File.expand_path('../test/lib/generators/simple_captcha/dummy/dummy_generator', __FILE__)
+    SimpleCaptcha::DummyGenerator.start %w(--quiet)
+  end
 
-desc 'Setup dummy Rails app for test purpose'
-task :setup_dummy_app do
-  require 'rails'
-  require 'simple_captcha'
-  require File.expand_path('../test/lib/generators/simple_captcha/dummy/dummy_generator', __FILE__)
+  desc 'destroy dummy Rails app under test/dummy'
+  task :destroy do
+    FileUtils.rm_rf "test/dummy" if File.exists?("test/dummy")
+  end
 
-  SimpleCaptcha::DummyGenerator.start %w(--quiet)
 end
+
 
 
 
