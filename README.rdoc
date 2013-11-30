@@ -14,6 +14,7 @@ backward compatibility with previous versions of Rails.
 * Implementation is as easy as just writing a single line in your view. "<%= show_simple_captcha %>" within the 'form' tags.
 * Flexible DOM and CSS handling(There is a separate view partial for rednering SimpleCaptcha DOM elements).
 * Automated removal of 1 hour old unmatched simple_captcha data.
+* Refresh button to refresh captcha
 
 ==Requirements
 

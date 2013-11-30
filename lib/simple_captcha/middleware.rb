@@ -2,7 +2,8 @@
 module SimpleCaptcha
   class Middleware
     include SimpleCaptcha::ImageHelpers
-    
+    include SimpleCaptcha::ViewHelper
+
     DEFAULT_SEND_FILE_OPTIONS = {
       :type         => 'application/octet-stream'.freeze,
       :disposition  => 'attachment'.freeze,
@@ -15,7 +16,12 @@ module SimpleCaptcha
     
     def call(env) # :nodoc:
       if env["REQUEST_METHOD"] == "GET" && captcha_path?(env['PATH_INFO'])
-        make_image(env)
+        request = Rack::Request.new(env)
+        if request.params.present? && request.params['code'].present?
+          make_image(env)
+        else
+          refresh_code(env)
+        end
       else
         @app.call(env)
       end
@@ -26,17 +32,17 @@ module SimpleCaptcha
         request = Rack::Request.new(env)
         code = request.params["code"]
         body = []
-        
-        if !code.blank? && Utils::simple_captcha_value(code)
+
+        if Utils::simple_captcha_value(code)
           #status, headers, body = @app.call(env)
           #status = 200
           #body = generate_simple_captcha_image(code)
           #headers['Content-Type'] = 'image/jpeg'
-          
-          return send_file(generate_simple_captcha_image(code), :type => 'image/jpeg', :disposition => 'inline', :filename =>  'simple_captcha.jpg')
+
+          send_file(generate_simple_captcha_image(code), :type => 'image/jpeg', :disposition => 'inline', :filename =>  'simple_captcha.jpg')
+        else
+          [status, headers, body]
         end
-        
-        [status, headers, body]
       end
       
       def captcha_path?(request_path)
@@ -53,6 +59,24 @@ module SimpleCaptcha
         response_body = File.open(path, "rb")
         
         [status, headers, response_body]
+      end
+
+      def refresh_code(env)
+        request = Rack::Request.new(env)
+
+        request.session.delete :captcha
+        key = simple_captcha_key(nil, request)
+        options = {}
+        options[:field_value] = set_simple_captcha_data(key, options)
+        url = simple_captcha_image_url(key, options)
+
+        status = 200
+        body = %Q{
+                    $("#captcha_image").attr('src', '#{url}');
+                    $("#captcha_key").attr('value', '#{key}');
+                  }
+        headers = {'Content-Type' => 'text/javascript; charset=utf-8', "Content-Disposition" => "inline; filename='captcha.js'", "Content-Length" => body.length.to_s}
+        [status, headers, [body]]
       end
   end
 end
