@@ -1,5 +1,7 @@
 =SimpleCaptcha2
 
+{<img src="https://travis-ci.org/pludoni/simple-captcha.png?branch=master" alt="Build Status" />}[https://travis-ci.org/pludoni/simple-captcha]
+
 SimpleCaptcha(2) is the simplest and a robust captcha plugin. Its implementation requires
 adding up a single line in views and in controllers/models.
 SimpleCaptcha2 is available to be used with Rails 3 + 4.
