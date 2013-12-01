@@ -45,6 +45,7 @@ module SimpleCaptcha
       directory "app", "#{dummy_path}/app"
       copy_file "config/database.yml", "#{dummy_path}/config/database.yml", :force => true
       template "config/routes.rb", "#{dummy_path}/config/routes.rb", :force => true
+      copy_file "config/boot.rb", "#{dummy_path}/config/boot.rb", :force => true
     end
 
     protected
