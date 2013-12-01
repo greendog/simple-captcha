@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gemspec
+gemspec :name => 'pludoni-simple_captcha'
 
 gem 'sqlite3'
 gem 'rails', ENV['RAILS'] || '~> 4.0'
