@@ -116,7 +116,7 @@ NOTE: @user.save will still work as it should, it will not validate the captcha 
 @user.save_with_captcha
 ```
 
-##=Formtastic integration
+###Formtastic integration
 
 SimpleCaptcha detects if you are using Formtastic:
 
@@ -137,14 +137,14 @@ SimpleCaptcha detects if you are using Formtastic:
 * ``:image_style`` - provides the specific image style for the captcha image.
 There are eight different styles available with the plugin as...
 
-  1. simply_blue
-  2. simply_red
-  3. simply_green
-  4. charcoal_grey
-  5. embosed_silver
-  6. all_black
-  7. distorted_black
-  8. almost_invisible
+1. simply_blue
+2. simply_red
+3. simply_green
+4. charcoal_grey
+5. embosed_silver
+6. all_black
+7. distorted_black
+8. almost_invisible
 
 Default style is 'simply_blue'.
 You can also specify 'random' to select the random image style.
@@ -215,7 +215,7 @@ end
 
 You can change the CSS of the SimpleCaptcha DOM elements as per your need in this file.
 
-  ./app/views/simple_captcha/_simple_captcha.erb
+``app/views/simple_captcha/_simple_captcha.erb``
 
 ###View's Examples
 ####Controller Based Example
