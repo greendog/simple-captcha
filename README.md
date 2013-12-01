@@ -238,7 +238,7 @@ You can change the CSS of the SimpleCaptcha DOM elements as per your need in thi
 
 * ``:add_to_base`` - if set to true, appends the error message to the base.
 
-####=Model's Example
+#####Model's Example
 
 ```ruby
 class User < ActiveRecord::Base
