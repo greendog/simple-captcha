@@ -38,7 +38,7 @@ end
 
 
 
-Bundler::GemHelper.install_tasks :name => 'pludoni-simple_captcha'
+Bundler::GemHelper.install_tasks :name => 'simple_captcha2'
 
 require 'rake/testtask'
 
