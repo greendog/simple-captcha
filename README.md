@@ -28,7 +28,7 @@ This is a fork of the popular Rubygem ``simple_captcha`` which got abandoned.
 Put this into your Gemfile
 
 ```ruby
-gem 'simple_captcha2'
+gem 'simple_captcha2', require: 'simple_captcha'
 ```
 
 and run ``bundle install``.
