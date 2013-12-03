@@ -124,6 +124,22 @@ SimpleCaptcha detects if you are using Formtastic:
 <%= form.input :captcha, :as => :simple_captcha %>
 ```
 
+### Tests
+
+You can make the Captcha always pass with a initializer file: config/initializers/simple_captcha.rb
+
+```ruby
+SimpleCaptcha.always_pass = Rails.env.test?
+```
+
+You can also ask for the value, e.g. Acceptance Tests/Features:
+
+```ruby
+visit '/pages/form_tag'
+assert_equal 1, SimpleCaptcha::SimpleCaptchaData.count
+fill_in 'captcha', with: SimpleCaptcha::SimpleCaptchaData.first.value
+```
+
 ##Options & Examples
 
 ###View Options
