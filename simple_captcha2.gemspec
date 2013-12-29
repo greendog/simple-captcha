@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.email = "stwienert@gmail.com"
   s.homepage = "http://github.com/pludoni/simple-captcha"
 
-  s.files = Dir["{lib}/**/*"] + ["Rakefile", "README.rdoc"]
-  s.extra_rdoc_files = ["README.rdoc"]
+  s.files = Dir["{lib}/**/*"] + ["Rakefile", "README.md"]
+  s.extra_rdoc_files = ["README.md"]
   s.require_paths = ["lib"]
 
   s.add_dependency 'rails', '>= 3.1'

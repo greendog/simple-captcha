@@ -14,6 +14,9 @@ env:
   - DB=sqlite FORMTASTIC='~> 2.2' RAILS='~> 4.0'
 
 matrix:
+  include:
+    - rvm: 2.1.0
+      env: DB=mysql RAILS='4.1.0.beta1'
   exclude:
     - rvm: 1.9.3
       env: DB=mysql RAILS='~> 4.0'
