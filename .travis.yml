@@ -1,7 +1,6 @@
 ---
 language: ruby
 script:
-    - 'cd test/dummy && rake db:migrate db:test:prepare'
     - rake test
 rvm:
   - '1.9.3'

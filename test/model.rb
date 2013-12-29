@@ -1,4 +1,4 @@
-
+require 'simple_captcha'
 if Rails.version > '4.0'
   class User
     include ActiveModel::Model
