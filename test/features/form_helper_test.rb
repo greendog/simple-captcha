@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'simple_captcha/controller'
 
 class FormHelperTest  < ActionDispatch::IntegrationTest
   include Capybara::DSL
