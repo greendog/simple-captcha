@@ -44,7 +44,13 @@ module SimpleCaptcha #:nodoc
     # All Feedbacks/CommentS/Issues/Queries are welcome.
     def show_simple_captcha(options={})
       key = simple_captcha_key(options[:object])
-      options[:field_value] = set_simple_captcha_data(key, options)
+      if options[:multiple] === false
+        # It's not the first captcha, we only need to return the key
+        options[:field_value] = key
+      else
+        # It's the first captcha in the page, we generate a new key
+        options[:field_value] = set_simple_captcha_data(key, options)        
+      end
       
       defaults = {
          :image => simple_captcha_image(key, options),
