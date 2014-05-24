@@ -8,8 +8,6 @@ class FormHelperTest  < ActionDispatch::IntegrationTest
   setup do
     SimpleCaptcha.always_pass = false
     Capybara.current_driver = Capybara.javascript_driver
-  end
-  teardown do
     SimpleCaptcha::SimpleCaptchaData.delete_all
   end
 

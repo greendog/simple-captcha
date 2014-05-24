@@ -6,8 +6,6 @@ if defined? Formtastic
 
     setup do
       SimpleCaptcha.always_pass = false
-    end
-    teardown do
       SimpleCaptcha::SimpleCaptchaData.delete_all
     end
 
