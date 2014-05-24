@@ -153,6 +153,7 @@ fill_in 'captcha', with: SimpleCaptcha::SimpleCaptchaData.first.value
 * ``:label`` - provides the custom text b/w the image and the text field, the default is "type the code from the image"
 * ``:object`` - the name of the object of the model class, to implement the model based captcha.
 * ``:code_type`` - return numeric only if set to 'numeric'
+* ``:multiple`` - allow to use the same captcha in multiple forms in one page. True for the first appaerance and false for the rest.
 
 ###Global options
 
