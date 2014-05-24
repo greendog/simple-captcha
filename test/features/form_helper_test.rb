@@ -3,9 +3,14 @@ require 'simple_captcha/controller'
 
 class FormHelperTest  < ActionDispatch::IntegrationTest
   include Capybara::DSL
+  self.use_transactional_fixtures = false
 
   setup do
     SimpleCaptcha.always_pass = false
+    Capybara.current_driver = Capybara.javascript_driver
+  end
+  teardown do
+    SimpleCaptcha::SimpleCaptchaData.delete_all
   end
 
   test 'displays captcha and passes' do
@@ -40,4 +45,15 @@ class FormHelperTest  < ActionDispatch::IntegrationTest
     assert page.has_content? 'captcha not valid'
   end
 
+  test 'Refresh Button' do
+    visit '/pages/form_tag'
+    # captcha= SimpleCaptcha::SimpleCaptchaData.first
+    img = find('img')['src']
+    click_on 'Refresh'
+
+    # assert_not_equal img, new_img
+    # fill_in 'captcha', with: new_captcha.value
+    # click_on 'Save changes'
+    # assert page.has_content? 'captcha valid'
+  end
 end

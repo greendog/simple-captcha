@@ -8,12 +8,12 @@ module SimpleCaptcha
       :type         => 'application/octet-stream'.freeze,
       :disposition  => 'attachment'.freeze,
     }.freeze
-    
+
     def initialize(app, options={})
       @app = app
       self
     end
-    
+
     def call(env) # :nodoc:
       if env["REQUEST_METHOD"] == "GET" && captcha_path?(env['PATH_INFO'])
         request = Rack::Request.new(env)
@@ -26,7 +26,7 @@ module SimpleCaptcha
         @app.call(env)
       end
     end
-    
+
     protected
       def make_image(env, headers = {}, status = 404)
         request = Rack::Request.new(env)
@@ -44,11 +44,11 @@ module SimpleCaptcha
           [status, headers, body]
         end
       end
-      
+
       def captcha_path?(request_path)
         request_path.include?('/simple_captcha')
       end
-      
+
       def send_file(path, options = {})
         raise MissingFile, "Cannot read file #{path}" unless File.file?(path) and File.readable?(path)
 
@@ -57,7 +57,7 @@ module SimpleCaptcha
         status = options[:status] || 200
         headers = {"Content-Disposition" => "#{options[:disposition]}; filename='#{options[:filename]}'", "Content-Type" => options[:type], 'Content-Transfer-Encoding' => 'binary', 'Cache-Control' => 'private'}
         response_body = File.open(path, "rb")
-        
+
         [status, headers, response_body]
       end
 
@@ -71,8 +71,10 @@ module SimpleCaptcha
         url = simple_captcha_image_url(key, options)
 
         status = 200
+        id = request.params['id']
+
         body = %Q{
-                    $("#captcha_image").attr('src', '#{url}');
+                    $("##{id}").attr('src', '#{url}');
                     $("#captcha_key").attr('value', '#{key}');
                   }
         headers = {'Content-Type' => 'text/javascript; charset=utf-8', "Content-Disposition" => "inline; filename='captcha.js'", "Content-Length" => body.length.to_s}
