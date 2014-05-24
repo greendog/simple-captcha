@@ -1,10 +1,14 @@
 if defined? Formtastic
   require 'test_helper'
   class FormtasticTest  < ActionDispatch::IntegrationTest
+    self.use_transactional_fixtures = false
     include Capybara::DSL
 
     setup do
       SimpleCaptcha.always_pass = false
+    end
+    teardown do
+      SimpleCaptcha::SimpleCaptchaData.delete_all
     end
 
     test 'displays captcha and passes' do
