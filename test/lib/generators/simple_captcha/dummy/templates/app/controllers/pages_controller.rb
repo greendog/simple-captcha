@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   end
 
   def form_tag_submit
+    simple_captcha_valid? # idempotence
     if simple_captcha_valid?
       render text: 'captcha valid!'
     else

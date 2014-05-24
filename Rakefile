@@ -33,6 +33,15 @@ namespace :dummy do
     FileUtils.rm_rf "test/dummy" if File.exists?("test/dummy")
   end
 
+  desc 'redo'
+  task :redo do
+    sh 'rake dummy:destroy'
+    sh 'rake dummy:setup'
+    sh 'rake app:db:migrate'
+    sh 'rake app:db:migrate RAILS_ENV=test'
+  end
+
+
 end
 
 

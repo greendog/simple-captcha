@@ -15,14 +15,16 @@ module SimpleCaptcha #:nodoc
     #  end
     def simple_captcha_valid?
       return true if SimpleCaptcha.always_pass
+      return @_simple_captcha_result unless @_simple_captcha_result.nil?
 
       if params[:captcha]
         data = SimpleCaptcha::Utils::simple_captcha_value(params[:captcha_key] || session[:captcha])
         result = data == params[:captcha].delete(" ").upcase
         SimpleCaptcha::Utils::simple_captcha_passed!(session[:captcha]) if result
-        return result
+        @_simple_captcha_result = result
+        result
       else
-        return false
+        false
       end
     end
   end

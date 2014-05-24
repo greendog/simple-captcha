@@ -31,6 +31,7 @@ class FormHelperTest  < ActionDispatch::IntegrationTest
     click_on 'Save changes'
     assert page.has_content? 'captcha valid'
   end
+
   test 'model based failure' do
     visit '/pages/model_tag'
     assert_equal 1, SimpleCaptcha::SimpleCaptchaData.count
@@ -38,4 +39,5 @@ class FormHelperTest  < ActionDispatch::IntegrationTest
     click_on 'Save changes'
     assert page.has_content? 'captcha not valid'
   end
+
 end
