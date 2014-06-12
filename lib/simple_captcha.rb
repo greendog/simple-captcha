@@ -14,8 +14,9 @@ module SimpleCaptcha
   autoload :FormBuilder,       'simple_captcha/form_builder'
   autoload :CustomFormBuilder, 'simple_captcha/formtastic'
 
+  autoload :ModelHelpers,      'simple_captcha/model_helpers'
+
   if defined?(ActiveRecord)
-    autoload :ModelHelpers,      'simple_captcha/active_record'
     autoload :SimpleCaptchaData, 'simple_captcha/simple_captcha_data'
   else
     autoload :SimpleCaptchaData,      'simple_captcha/simple_captcha_data_mongoid.rb'
