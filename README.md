@@ -45,7 +45,7 @@ After installation, follow these simple steps to setup the plugin. The setup wil
 
 ```bash
 rails generate simple_captcha
-rake db:migrate
+rake db:migrate # Mongoid: skip this step and remove the migration
 ```
 
 ## Usage
@@ -94,6 +94,23 @@ and in the model class add this code
 class User < ActiveRecord::Base
   apply_simple_captcha
 end
+```
+
+Mongoid:
+
+```ruby
+class User
+  include SimpleCaptcha::ModelHelpers
+  apply_simple_captcha
+end
+```
+
+#### Strong parameters (Rails 4.x)
+
+Must add them:
+
+```ruby
+:captcha, :captcha_key
 ```
 
 ####Form-Builder helper
