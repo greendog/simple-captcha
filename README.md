@@ -191,6 +191,8 @@ You can also specify 'random' to select the random image style.
 
 * ``:distortion`` - handles the complexity of the image. The :distortion can be set to 'low', 'medium' or 'high'. Default is 'low'.
 
+* ``:implode`` - handles the complexity of the image. The :implode can be set to 'none', 'low', 'medium' or 'high'. Default is 'medium'.
+
 Create "./config/initializers/simple_captcha.rb"
 
 ```ruby
@@ -217,6 +219,10 @@ SimpleCaptcha.setup do |sc|
   # default: low
   # possible values: 'low', 'medium', 'high', 'random'
   sc.distortion = 'medium'
+
+  # default: medium
+  # possible values: 'none', 'low', 'medium', 'high'
+  sc.implode = 'low'
 end
 ```
 

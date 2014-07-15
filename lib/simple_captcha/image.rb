@@ -16,6 +16,9 @@ module SimpleCaptcha #:nodoc
 
     DISTORTIONS = ['low', 'medium', 'high']
 
+    IMPLODES = { 'none' => 0, 'low' => 0.1, 'medium' => 0.2, 'high' => 0.3 }
+    DEFAULT_IMPLODE = 'medium'
+
     class << self
 
       def image_params(key = 'simply_blue')
@@ -43,6 +46,10 @@ module SimpleCaptcha #:nodoc
           when 'high' then return [4 + rand(2), 30 + rand(20)]
         end
       end
+
+      def implode
+        IMPLODES[SimpleCaptcha.implode] || IMPLODES[DEFAULT_IMPLODE]
+      end
     end
 
     if RUBY_VERSION < '1.9'
@@ -67,7 +74,7 @@ module SimpleCaptcha #:nodoc
         #params << "-gravity 'Center'"
         params << "-gravity \"Center\""
         params << "-pointsize 22"
-        params << "-implode 0.2"
+        params << "-implode #{ImageHelpers.implode}"
 
         dst = Tempfile.new(RUBY_VERSION < '1.9' ? 'simple_captcha.jpg' : ['simple_captcha', '.jpg'], SimpleCaptcha.tmp_path)
         dst.binmode
