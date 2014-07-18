@@ -47,6 +47,10 @@ module SimpleCaptcha
   mattr_accessor :distortion
   @@distortion = 'low'
 
+  # 'none', 'low', 'medium', 'high'
+  mattr_accessor :implode
+  @@implode = SimpleCaptcha::ImageHelpers::DEFAULT_IMPLODE
+
   # command path
   mattr_accessor :image_magick_path
   @@image_magick_path = ''
