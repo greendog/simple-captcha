@@ -74,8 +74,13 @@ module SimpleCaptcha #:nodoc
         defaults = {}
         defaults[:time] = options[:time] || Time.now.to_i
 
-        query = defaults.collect{ |key, value| "#{key}=#{value}" }.join('&')
-        "#{request.protocol}#{request.host_with_port}#{ENV['RAILS_RELATIVE_URL_ROOT']}/simple_captcha?code=#{simple_captcha_key}&#{query}"
+        query = defaults.to_query
+        path = "/simple_captcha?code=#{simple_captcha_key}&#{query}"
+        if defined?(request)
+          "#{request.protocol}#{request.host_with_port}#{ENV['RAILS_RELATIVE_URL_ROOT']}#{path}"
+        else
+          "#{ENV['RAILS_RELATIVE_URL_ROOT']}#{path}"
+        end
       end
 
       def simple_captcha_field(options={})
