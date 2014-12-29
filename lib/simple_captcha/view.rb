@@ -133,8 +133,8 @@ module SimpleCaptcha #:nodoc
         return value
       end
 
-      def simple_captcha_key(key_name = nil, request = request)
-        local_session = request.try(:session) || session
+      def simple_captcha_key(key_name = nil, prequest = request)
+        local_session = prequest.try(:session) || session
         if key_name.nil?
           local_session[:captcha] ||= SimpleCaptcha::Utils.generate_key(local_session[:id].to_s, 'captcha')
         else
