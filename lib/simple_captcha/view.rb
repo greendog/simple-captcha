@@ -76,7 +76,7 @@ module SimpleCaptcha #:nodoc
 
         query = defaults.to_query
         path = "/simple_captcha?code=#{simple_captcha_key}&#{query}"
-        if defined?(request)
+        if defined?(request) && request
           "#{request.protocol}#{request.host_with_port}#{ENV['RAILS_RELATIVE_URL_ROOT']}#{path}"
         else
           "#{ENV['RAILS_RELATIVE_URL_ROOT']}#{path}"
