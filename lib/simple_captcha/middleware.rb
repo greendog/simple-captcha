@@ -84,7 +84,7 @@ module SimpleCaptcha
                     $("##{id}").attr('src', '#{url}');
                     $("#captcha_key").attr('value', '#{key}');
                   }
-        headers = {'Content-Type' => 'text/javascript; charset=utf-8', "Content-Disposition" => "inline; filename='captcha.js'", "Content-Length" => body.length.to_s}
+        headers = {'Content-Type' => 'text/javascript; charset=utf-8', "Content-Disposition" => "inline; filename='captcha.js'", "Content-Length" => body.length.to_s}.merge(SimpleCaptcha.extra_response_headers)
         [status, headers, [body]]
       end
   end

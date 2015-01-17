@@ -59,7 +59,7 @@ module SimpleCaptcha #:nodoc
         :refresh_button => simple_captcha_refresh_button(options),
       }.merge(options)
 
-      render :partial => 'simple_captcha/simple_captcha', :locals => { :simple_captcha_options => defaults }
+      render :partial => SimpleCaptcha.partial_path, :locals => { :simple_captcha_options => defaults }
     end
 
     private
