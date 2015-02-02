@@ -36,7 +36,7 @@ module SimpleCaptcha
           html[:placeholder] = options[:placeholder] || I18n.t('simple_captcha.placeholder')
 
           text_field(:captcha, html) +
-          hidden_field(:captcha_key, {:value => options[:field_value]})
+          hidden_field(:captcha_key, {:value => options[:field_value], :id => simple_captch_hidden_field_id(options)})
         end
     end
   end

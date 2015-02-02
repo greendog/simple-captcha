@@ -90,10 +90,10 @@ module SimpleCaptcha #:nodoc
 
         if options[:object]
           text_field(options[:object], :captcha, html.merge(:value => '')) +
-          hidden_field(options[:object], :captcha_key, {:value => options[:field_value]})
+          hidden_field(options[:object], :captcha_key, {:value => options[:field_value], :id => simple_captch_hidden_field_id(options)})
         else
           text_field_tag(:captcha, nil, html) +
-          hidden_field_tag(:captcha_key, options[:field_value])
+          hidden_field_tag(:captcha_key, options[:field_value], :id => simple_captch_hidden_field_id(options))
         end
       end
 
@@ -108,6 +108,11 @@ module SimpleCaptcha #:nodoc
 
       def simple_captcha_image_id(options={})
         "simple_captcha-#{options[:field_value][0..10]}"
+      end
+
+      def simple_captch_hidden_field_id(image_id)
+        image_id = simple_captcha_image_id(image_id) if image_id.is_a?(Hash)
+        "simple-captcha-hidden-field-#{ image_id }"
       end
 
       def set_simple_captcha_data(key, options={})

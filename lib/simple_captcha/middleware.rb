@@ -79,10 +79,11 @@ module SimpleCaptcha
 
         status = 200
         id = request.params['id']
+        captcha_hidden_field_id = simple_captch_hidden_field_id(id)
 
         body = %Q{
                     $("##{id}").attr('src', '#{url}');
-                    $("#captcha_key").attr('value', '#{key}');
+                    $("##{ captcha_hidden_field_id }").attr('value', '#{key}');
                   }
         headers = {'Content-Type' => 'text/javascript; charset=utf-8', "Content-Disposition" => "inline; filename='captcha.js'", "Content-Length" => body.length.to_s}.merge(SimpleCaptcha.extra_response_headers)
         [status, headers, [body]]
