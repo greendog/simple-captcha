@@ -42,7 +42,11 @@ module SimpleCaptcha #:nodoc
     # Find more detailed examples with sample images here on my blog http://EXPRESSICA.com
     #
     # All Feedbacks/CommentS/Issues/Queries are welcome.
-    def show_simple_captcha(options={})
+    def show_simple_captcha(options = {})
+      render :partial => SimpleCaptcha.partial_path, :locals => { :simple_captcha_options => simple_captcha_options(options) }
+    end
+
+    def simple_captcha_options(options = {})
       key = simple_captcha_key(options[:object])
       if options[:multiple] === false
         # It's not the first captcha, we only need to return the key
@@ -58,8 +62,6 @@ module SimpleCaptcha #:nodoc
         :field => simple_captcha_field(options),
         :refresh_button => simple_captcha_refresh_button(options),
       }.merge(options)
-
-      render :partial => SimpleCaptcha.partial_path, :locals => { :simple_captcha_options => defaults }
     end
 
     private
