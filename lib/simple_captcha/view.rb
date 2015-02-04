@@ -78,6 +78,10 @@ module SimpleCaptcha #:nodoc
 
         query = defaults.to_query
         path = "/simple_captcha?code=#{simple_captcha_key}&#{query}"
+        build_url(options, path)
+      end
+
+      def build_url(options, path)
         if defined?(request) && request
           "#{request.protocol}#{request.host_with_port}#{ENV['RAILS_RELATIVE_URL_ROOT']}#{path}"
         else
@@ -105,7 +109,8 @@ module SimpleCaptcha #:nodoc
 
         text = options[:refresh_button_text] || I18n.t('simple_captcha.refresh_button_text', default: 'Refresh')
 
-        link_to(text, "#{ENV['RAILS_RELATIVE_URL_ROOT']}/simple_captcha?id=#{simple_captcha_image_id(options)}", html)
+        url = build_url(options, "/simple_captcha?id=#{simple_captcha_image_id(options)}")
+        link_to(text, url, html)
       end
 
       def simple_captcha_image_id(options={})
