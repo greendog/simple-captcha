@@ -42,7 +42,11 @@ module SimpleCaptcha #:nodoc
     # Find more detailed examples with sample images here on my blog http://EXPRESSICA.com
     #
     # All Feedbacks/CommentS/Issues/Queries are welcome.
-    def show_simple_captcha(options={})
+    def show_simple_captcha(options = {})
+      render :partial => SimpleCaptcha.partial_path, :locals => { :simple_captcha_options => simple_captcha_options(options) }
+    end
+
+    def simple_captcha_options(options = {})
       key = simple_captcha_key(options[:object])
       if options[:multiple] === false
         # It's not the first captcha, we only need to return the key
@@ -58,8 +62,6 @@ module SimpleCaptcha #:nodoc
         :field => simple_captcha_field(options),
         :refresh_button => simple_captcha_refresh_button(options),
       }.merge(options)
-
-      render :partial => 'simple_captcha/simple_captcha', :locals => { :simple_captcha_options => defaults }
     end
 
     private
@@ -76,6 +78,10 @@ module SimpleCaptcha #:nodoc
 
         query = defaults.to_query
         path = "/simple_captcha?code=#{simple_captcha_key}&#{query}"
+        build_url(options, path)
+      end
+
+      def build_url(options, path)
         if defined?(request) && request
           "#{request.protocol}#{request.host_with_port}#{ENV['RAILS_RELATIVE_URL_ROOT']}#{path}"
         else
@@ -90,10 +96,10 @@ module SimpleCaptcha #:nodoc
 
         if options[:object]
           text_field(options[:object], :captcha, html.merge(:value => '')) +
-          hidden_field(options[:object], :captcha_key, {:value => options[:field_value]})
+          hidden_field(options[:object], :captcha_key, {:value => options[:field_value], :id => simple_captch_hidden_field_id(options)})
         else
           text_field_tag(:captcha, nil, html) +
-          hidden_field_tag(:captcha_key, options[:field_value])
+          hidden_field_tag(:captcha_key, options[:field_value], :id => simple_captch_hidden_field_id(options))
         end
       end
 
@@ -103,11 +109,17 @@ module SimpleCaptcha #:nodoc
 
         text = options[:refresh_button_text] || I18n.t('simple_captcha.refresh_button_text', default: 'Refresh')
 
-        link_to(text, "#{ENV['RAILS_RELATIVE_URL_ROOT']}/simple_captcha?id=#{simple_captcha_image_id(options)}", html)
+        url = build_url(options, "/simple_captcha?id=#{simple_captcha_image_id(options)}")
+        link_to(text, url, html)
       end
 
       def simple_captcha_image_id(options={})
         "simple_captcha-#{options[:field_value][0..10]}"
+      end
+
+      def simple_captch_hidden_field_id(image_id)
+        image_id = simple_captcha_image_id(image_id) if image_id.is_a?(Hash)
+        "simple-captcha-hidden-field-#{ image_id }"
       end
 
       def set_simple_captcha_data(key, options={})
