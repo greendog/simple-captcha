@@ -47,7 +47,7 @@ module SimpleCaptcha #:nodoc
     end
 
     def simple_captcha_options(options = {})
-      key = simple_captcha_key(options[:object])
+      key = simple_captcha_key(options[:key_name])
       if options[:multiple] === false
         # It's not the first captcha, we only need to return the key
         options[:field_value] = key
